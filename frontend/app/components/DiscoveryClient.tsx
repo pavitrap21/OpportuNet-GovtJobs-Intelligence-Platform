@@ -100,7 +100,7 @@ export default function DiscoveryClient({
 
       <div className="discovery-meta-row">
         <span className="result-count">
-          Showing <strong>{filteredItems.length}</strong> verified public sector recruitment{filteredItems.length === 1 ? '' : 's'}
+          Showing <strong>{filteredItems.length}</strong> sample public sector recruitment{filteredItems.length === 1 ? '' : 's'}
         </span>
         {(searchQuery || selectedOrg !== 'ALL' || selectedEdu !== 'ALL') && (
           <button
@@ -138,7 +138,7 @@ function RecruitmentCard({ recruitment }: { recruitment: Recruitment }) {
   return (
     <article className="recruitment-card">
       <div className="card-topline">
-        <span className="status-pill status-verified">✓ VERIFIED OFFICIAL</span>
+        <span className="status-pill status-verified">SAMPLE DATA · UNVERIFIED</span>
         <span className="org-badge">
           {recruitment.organization_name || recruitment.organization_id}
         </span>

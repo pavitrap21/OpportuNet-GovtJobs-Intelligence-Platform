@@ -5,7 +5,7 @@ import { getApiBaseUrl, type EvaluationResult } from '../recruitments/data';
 
 export default function EligibilityChecker({
   jobPostId,
-  initialDob = '1995-06-12',
+  initialDob = '',
   initialCategory = 'GENERAL',
   initialDomicile = 'Telangana',
 }: {
@@ -67,7 +67,7 @@ export default function EligibilityChecker({
         <span className="engine-label">RULE ENGINE · v2.0</span>
       </div>
       <p className="muted">
-        Compares your exact age, category relaxations, educational rank, and local reservation against official notification rules.
+        Compares your inputs against illustrative sample rules. Do not use this result to decide whether to apply.
       </p>
 
       <form className="eligibility-form" onSubmit={evaluate}>
@@ -144,12 +144,12 @@ export default function EligibilityChecker({
             </span>
             <div>
               <strong>
-                {evaluation.result === 'ELIGIBLE' && '✓ You satisfy all verified mandatory criteria.'}
-                {evaluation.result === 'LIKELY_ELIGIBLE' && '✓ You satisfy core criteria; check non-local / quota notes.'}
-                {evaluation.result === 'NOT_ELIGIBLE' && '✗ You do not meet one or more mandatory conditions.'}
+                {evaluation.result === 'ELIGIBLE' && '✓ This profile matches the demo rules shown.'}
+                {evaluation.result === 'LIKELY_ELIGIBLE' && '✓ This profile matches some sample rules; confirm the official notice.'}
+                {evaluation.result === 'NOT_ELIGIBLE' && '✗ This sample check found a rule mismatch; verify the notice.'}
                 {evaluation.result === 'INSUFFICIENT_DATA' && '⚠ Required profile information is missing.'}
               </strong>
-              <small>Calculated on official reference date per published rules.</small>
+              <small>Illustrative calculation only; the sample rules may be outdated or inaccurate.</small>
             </div>
           </div>
 

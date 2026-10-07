@@ -35,15 +35,15 @@ export default async function HomePage() {
             <span className="live-dot" /> INDIA · PUBLIC SECTOR RECRUITMENT INTELLIGENCE
           </p>
           <h1>
-            Evidence-backed clarity for<br />
+            A clearer way to explore<br />
             <em>public service aspirants.</em>
           </h1>
           <p className="hero-description">
-            Cut through fragmented PDFs and rumors. Discover verified notifications from SSC, UPSC, IBPS, RRB, and State PSCs with deterministic eligibility rules and official page-level citations.
+            Explore sample listings from SSC, UPSC, IBPS, RRB, and Telangana. This public preview is not a live feed and its recruitment data has not been verified.
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href="#opportunities">
-              Explore Active Recruitments <span aria-hidden="true">↓</span>
+              Explore Sample Recruitments <span aria-hidden="true">↓</span>
             </a>
             <Link className="button button-outline" href="/profile">
               Check Profile Match <span aria-hidden="true">→</span>
@@ -53,12 +53,12 @@ export default async function HomePage() {
             <span className="shield-icon" aria-hidden="true">
               ✓
             </span>{' '}
-            Deterministic calculation · Official gazette citations · No hallucinated criteria
+            Illustrative rules only · Verify dates and eligibility in current official notices
           </div>
         </div>
 
         <aside className="hero-panel" aria-label="Platform principles">
-          <span className="panel-kicker">CORE ECOSYSTEMS MONITORED</span>
+          <span className="panel-kicker">SAMPLE ECOSYSTEMS</span>
           <h2>Central & State Public Recruitments</h2>
           <div className="principle">
             <span>01</span>
@@ -82,7 +82,7 @@ export default async function HomePage() {
             </div>
           </div>
           <p className="preview-caption">
-            OFFICIAL SOURCES AUDITED · DETERMINISTIC ELIGIBILITY ENGINE v2.0
+            SAMPLE DATA · NOT A LIVE VERIFIED SERVICE
           </p>
         </aside>
       </section>
@@ -101,14 +101,14 @@ export default async function HomePage() {
         <div className="notice notice-error" role="alert">
           <strong>Recruitment Service Offline</strong>
           <p>{response.error}</p>
-          <p>Start the FastAPI backend with uvicorn on port 8000 to view live notifications.</p>
+          <p>The sample recruitment service is currently unavailable.</p>
         </div>
       ) : (
         <DiscoveryClient initialItems={items} />
       )}
 
       <footer className="site-footer">
-        <span>Civic Careers · Trusted Public Sector Jobs Platform</span>
+        <span>Civic Careers · Public Demo</span>
         <span>Always verify exact post terms and submit applications on official recruitment portals.</span>
       </footer>
     </main>

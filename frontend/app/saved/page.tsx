@@ -330,7 +330,7 @@ export default function SavedPage() {
       </div>
 
       <footer className="site-footer">
-        <span>Civic Careers · Verified Indian Public Sector Intelligence</span>
+        <span>Civic Careers · Public Demo · Sample recruitment data</span>
         <span>Always verify exact application closing times with the organizing body.</span>
       </footer>
     </main>

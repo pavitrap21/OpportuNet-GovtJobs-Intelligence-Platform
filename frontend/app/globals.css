@@ -877,3 +877,25 @@ a { color: inherit; }
     grid-template-columns: 1fr;
   }
 }
+
+
+.public-demo-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  padding: 12px max(16px, calc((100vw - 1160px) / 2));
+  border-bottom: 1px solid #b56a25;
+  background: #fff3df;
+  color: #633b12;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.public-demo-banner strong {
+  flex: 0 0 auto;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+.public-demo-banner span {
+  flex: 1 1 500px;
+}

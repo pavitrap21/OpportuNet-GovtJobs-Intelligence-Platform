@@ -58,7 +58,7 @@ export default function AssistantDrawer({
           <span className="copilot-icon">✦</span>
           <div>
             <strong>Recruitment Copilot</strong>
-            <small>Ask questions grounded in official evidence</small>
+            <small>Ask questions about this sample recruitment</small>
           </div>
         </div>
         <button
@@ -77,7 +77,7 @@ export default function AssistantDrawer({
       {isOpen && (
         <div className="copilot-body">
           <p className="copilot-intro">
-            Ask any question about <strong>{recruitmentTitle}</strong>. Answers are synthesized strictly from the verified notification and include exact page citations.
+            Ask any question about <strong>{recruitmentTitle}</strong>. Answers use sample data and may not match the current official notification.
           </p>
 
           <div className="suggested-prompts">
@@ -122,11 +122,11 @@ export default function AssistantDrawer({
             <div className="copilot-answer-card">
               <div className="answer-topline">
                 <span className="badge badge-verified">
-                  ✓ {response.verification_status}
+                  DEMO ANSWER · UNVERIFIED
                 </span>
                 {response.last_verified_at && (
                   <span className="verified-timestamp">
-                    Verified {new Date(response.last_verified_at).toLocaleDateString('en-IN')}
+                    Sample timestamp {new Date(response.last_verified_at).toLocaleDateString('en-IN')}
                   </span>
                 )}
               </div>
@@ -139,7 +139,7 @@ export default function AssistantDrawer({
 
               {response.citations.length > 0 && (
                 <div className="answer-citations">
-                  <span className="citations-header">OFFICIAL NOTIFICATION CITATIONS</span>
+                  <span className="citations-header">SAMPLE SOURCE REFERENCES</span>
                   {response.citations.map((c, i) => (
                     <div className="citation-box" key={i}>
                       <div className="citation-meta">
@@ -150,7 +150,7 @@ export default function AssistantDrawer({
                       {c.quote && <p className="citation-quote">“{c.quote}”</p>}
                       {c.url && (
                         <a href={c.url} target="_blank" rel="noreferrer" className="citation-link">
-                          View official PDF source ↗
+                          Open listed source ↗
                         </a>
                       )}
                     </div>

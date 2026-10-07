@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from contextlib import asynccontextmanager
 from datetime import date
+import os
 from typing import Any
 from uuid import uuid4
 
@@ -67,6 +68,12 @@ app.add_middleware(
 )
 
 PROFILE_VERSION = 1
+PUBLIC_DEMO_MODE = os.getenv("PUBLIC_DEMO_MODE", "false").casefold() in {"1", "true", "yes"}
+
+
+def enforce_public_demo_read_only() -> None:
+    if PUBLIC_DEMO_MODE:
+        raise HTTPException(status_code=403, detail="This public preview is read-only.")
 
 
 @app.get("/")
@@ -256,6 +263,20 @@ def refresh() -> None:
 
 @app.get("/v1/profile")
 def get_profile(db: Session = Depends(get_db)):
+    if PUBLIC_DEMO_MODE:
+        return {
+            "user_id": "demo",
+            "date_of_birth": None,
+            "gender": "",
+            "category": "GENERAL",
+            "domicile_state": "",
+            "preferred_states": [],
+            "education_level": "",
+            "degree_name": "",
+            "specialization": "",
+            "experience_years": 0,
+            "profile_version": 1,
+        }
     db_prof = db.query(DBUserProfile).filter(DBUserProfile.user_id == USER_PROFILE.user_id).first()
     if db_prof:
         return {
@@ -276,6 +297,7 @@ def get_profile(db: Session = Depends(get_db)):
 
 @app.put("/v1/profile")
 def update_profile(payload: CandidateProfile, db: Session = Depends(get_db)) -> dict[str, Any]:
+    enforce_public_demo_read_only()
     global PROFILE_VERSION
     for field, value in payload.model_dump().items():
         if field != "user_id":
@@ -302,6 +324,8 @@ def update_profile(payload: CandidateProfile, db: Session = Depends(get_db)) -> 
 
 @app.get("/v1/profile/evaluations")
 def get_profile_evaluations(db: Session = Depends(get_db)):
+    if PUBLIC_DEMO_MODE:
+        return {"items": []}
     matches = []
     for recruitment in RECRUITMENTS:
         for post in recruitment.posts:
@@ -329,6 +353,7 @@ def evaluate(payload: EligibilityRequest, db: Session = Depends(get_db)) -> dict
 
 @app.post("/v1/recruitments/{recruitment_id}/save")
 def save_recruitment(recruitment_id: str, db: Session = Depends(get_db)):
+    enforce_public_demo_read_only()
     if recruitment_id not in [r.id for r in RECRUITMENTS]:
         raise HTTPException(status_code=404, detail="Recruitment not found")
     if recruitment_id not in SAVED_RECRUITMENT_IDS:
@@ -349,6 +374,7 @@ def save_recruitment(recruitment_id: str, db: Session = Depends(get_db)):
 
 @app.delete("/v1/recruitments/{recruitment_id}/save")
 def unsave_recruitment(recruitment_id: str, db: Session = Depends(get_db)):
+    enforce_public_demo_read_only()
     if recruitment_id not in [r.id for r in RECRUITMENTS]:
         raise HTTPException(status_code=404, detail="Recruitment not found")
     if recruitment_id in SAVED_RECRUITMENT_IDS:
@@ -364,11 +390,14 @@ def unsave_recruitment(recruitment_id: str, db: Session = Depends(get_db)):
 
 @app.get("/v1/saved")
 def get_saved():
+    if PUBLIC_DEMO_MODE:
+        return {"items": []}
     return {"items": [r.model_dump() for r in RECRUITMENTS if r.id in SAVED_RECRUITMENT_IDS]}
 
 
 @app.post("/v1/reminders")
 def create_reminder(payload: RemindersCreate) -> dict[str, Any]:
+    enforce_public_demo_read_only()
     if payload.recruitment_id not in {recruitment.id for recruitment in RECRUITMENTS}:
         raise HTTPException(status_code=404, detail="Recruitment not found")
     reminder = {
@@ -385,6 +414,7 @@ def create_reminder(payload: RemindersCreate) -> dict[str, Any]:
 
 @app.delete("/v1/reminders/{reminder_id}")
 def delete_reminder(reminder_id: str):
+    enforce_public_demo_read_only()
     for idx, reminder in enumerate(REMINDERS):
         if reminder["id"] == reminder_id:
             REMINDERS.pop(idx)
@@ -394,6 +424,8 @@ def delete_reminder(reminder_id: str):
 
 @app.get("/v1/reminders")
 def get_reminders():
+    if PUBLIC_DEMO_MODE:
+        return {"items": []}
     return {"items": REMINDERS}
 
 

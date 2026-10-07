@@ -58,7 +58,7 @@ export default async function RecruitmentDetailPage({
       )}
 
       <footer className="site-footer">
-        <span>Civic Careers · Verified Indian Public Sector Intelligence</span>
+        <span>Civic Careers · Public Demo · Sample recruitment data</span>
         <span>Always confirm application steps and deadlines on the official portal.</span>
       </footer>
     </main>
@@ -91,7 +91,7 @@ function RecruitmentDetails({
       <section className="detail-hero">
         <div>
           <div className="badge-row">
-            <span className="status-pill status-verified">✓ VERIFIED OFFICIAL NOTICE</span>
+            <span className="status-pill status-verified">SAMPLE NOTICE · UNVERIFIED</span>
             <span className="org-pill">
               {recruitment.organization_name || recruitment.organization_id}
             </span>
@@ -110,7 +110,7 @@ function RecruitmentDetails({
                 target="_blank"
                 rel="noreferrer"
               >
-                Apply on Official Portal ↗
+                Open Listed Application Site ↗
               </a>
             )}
             <Link className="button button-outline" href="/saved">
@@ -122,11 +122,11 @@ function RecruitmentDetails({
         <aside className="verification-card">
           <span className="verification-icon">✓</span>
           <div>
-            <strong>Official Source Backed</strong>
+            <strong>Sample data and reference links</strong>
             <p>
-              Verified against published gazette / recruitment notice.
+              This demo does not check current notices or source changes.
               {recruitment.last_verified_at &&
-                ` Last audited: ${new Date(
+                ` Sample record timestamp: ${new Date(
                   recruitment.last_verified_at
                 ).toLocaleDateString('en-IN')}`}
             </p>
@@ -239,7 +239,7 @@ function RecruitmentDetails({
             <div className="section-title">
               <div>
                 <p className="eyebrow">PROVENANCE & CITATIONS</p>
-                <h2>Official Source Documents & Evidence</h2>
+                <h2>Sample Source Links & Excerpts</h2>
               </div>
             </div>
 
@@ -249,7 +249,7 @@ function RecruitmentDetails({
                   {evidenceItems.map((ev) => (
                     <div className="evidence-fragment-card" key={ev.id}>
                       <div className="evidence-meta">
-                        <span className="evidence-badge">OFFICIAL CITATION</span>
+                        <span className="evidence-badge">SAMPLE EXCERPT</span>
                         <strong>{ev.section_heading}</strong>
                         {ev.page_number && (
                           <span className="page-tag">Page {ev.page_number}</span>

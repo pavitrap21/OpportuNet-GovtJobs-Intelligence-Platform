@@ -348,7 +348,7 @@ export default function ProfilePage() {
       </div>
 
       <footer className="site-footer">
-        <span>Civic Careers · Verified Indian Public Sector Intelligence</span>
+        <span>Civic Careers · Public Demo · Sample recruitment data</span>
         <span>Deterministic eligibility evaluation based on official reference dates.</span>
       </footer>
     </main>
