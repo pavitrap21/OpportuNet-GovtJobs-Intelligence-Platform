@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local databases and runtime data
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite-*
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# Build and test output
+build/
+dist/
+coverage/
